@@ -16,7 +16,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import util.OperationMatcher;
 
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.argThat;
@@ -43,6 +45,8 @@ public class AccountServiceSteps {
 
     private List<Operation> expectedOperationList;
 
+    private Date startingTime;
+
     public AccountServiceSteps(){
 
     }
@@ -52,6 +56,7 @@ public class AccountServiceSteps {
         this.accountId=100;
         MockitoAnnotations.initMocks(this);
         this.expectedOperationList = new ArrayList<>();
+        this.startingTime = Date.from(Instant.now());
     }
 
     @Given("^my account balance is at €(\\d+.\\d+)$")
@@ -94,11 +99,13 @@ public class AccountServiceSteps {
         Assert.assertEquals("Number of operations",nbOfDeposits+nbOfWithdrawals,operationList.size());
         Assert.assertEquals("Deposit amount check",amountOfDeposit,operationList.get(0).getAmount(),0.001);
         Assert.assertEquals("Deposit type check", OperationType.DEPOSIT,operationList.get(0).getOperationType());
-        //Assert.assertThat("Deposit date check",new Date(),operationList.get(0).getDate());
+        Assert.assertTrue("Deposit date check",!operationList.get(0).getDate().after(Date.from(Instant.now()))
+                                                            && !operationList.get(0).getDate().before(startingTime));
         Assert.assertEquals("Withdrawal amount check",amountOfWithdrawal,operationList.get(1).getAmount(),0.001);
         Assert.assertEquals("Withdrawal type check",OperationType.WITHDRAWAL,operationList.get(1).getOperationType());
-        //Assert.assertEquals("Withdrawal date check",new Date(),operationList.get(1).getDate());
-        Assert.assertTrue("Date order check",operationList.get(0).getDate().before(operationList.get(1).getDate()));
+        Assert.assertTrue("Withdrawal date check",!operationList.get(1).getDate().after(Date.from(Instant.now()))
+                        && !operationList.get(1).getDate().before(startingTime));
+        Assert.assertTrue("Date order check",!operationList.get(0).getDate().after(operationList.get(1).getDate()));
     }
 
 }
