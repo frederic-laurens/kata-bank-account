@@ -60,14 +60,14 @@ public class AccountServiceSteps {
     }
 
     @Given("^my account balance is at €(\\d+.\\d+)$")
-    public void my_account_balance_is_at_€(float amount) throws Throwable {
+    public void my_account_balance_is_at_€(double amount) throws Throwable {
         Account account = new Account(accountId);
         account.updateBalance(amount);
         when(accountDAOMock.getAccountById(accountId)).thenReturn(account);
     }
 
     @When("^I make a deposit of €(\\d+.\\d+) to my account$")
-    public void i_make_a_deposit_of_€_to_my_account(float amount) throws Throwable {
+    public void i_make_a_deposit_of_€_to_my_account(double amount) throws Throwable {
         accountService.makeDepositOnAccount(accountId, amount);
         Operation expected = new Operation(accountId,amount,OperationType.DEPOSIT);
         this.expectedOperationList.add(expected);
@@ -75,7 +75,7 @@ public class AccountServiceSteps {
     }
 
     @Then("^the new balance of my account is €(\\d+.\\d+)$")
-    public void the_new_balance_of_my_account_is_€(float amount) throws Throwable {
+    public void the_new_balance_of_my_account_is_€(double amount) throws Throwable {
         Assert.assertEquals(amount, accountService.getCurrentBalance(accountId), 0.001);
     }
 
@@ -85,7 +85,7 @@ public class AccountServiceSteps {
     }
 
     @When("^I retrieve €(\\d+.\\d+) from my account$")
-    public void i_retrieve_€_from_my_account(float amount) throws Throwable {
+    public void i_retrieve_€_from_my_account(double amount) throws Throwable {
         accountService.retrieveFromAccount(accountId, amount);
         Operation expected = new Operation(accountId,amount,OperationType.WITHDRAWAL);
         this.expectedOperationList.add(expected);
@@ -93,7 +93,7 @@ public class AccountServiceSteps {
     }
 
     @Then("^I get a listing of (\\d+) deposit of €(\\d+.\\d+) then (\\d+) withdrawal €(\\d+.\\d+) of today$")
-    public void i_get_a_listing_of_deposit_of_€_then_withdrawal_€_of_today(int nbOfDeposits, float amountOfDeposit, int nbOfWithdrawals, float amountOfWithdrawal) throws Throwable {
+    public void i_get_a_listing_of_deposit_of_€_then_withdrawal_€_of_today(int nbOfDeposits, double amountOfDeposit, int nbOfWithdrawals, double amountOfWithdrawal) throws Throwable {
         when(operationDAOMock.getOperationByAccount(accountId)).thenReturn(this.expectedOperationList);
         operationList = accountService.getAccountHistory(accountId);
         Assert.assertEquals("Number of operations",nbOfDeposits+nbOfWithdrawals,operationList.size());

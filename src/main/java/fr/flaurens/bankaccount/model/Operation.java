@@ -6,13 +6,13 @@ public class Operation {
 
     private final long accountId;
 
-    private final float amount;
+    private final double amount;
 
     private final Date date;
 
     private final OperationType operationType;
 
-    public Operation(long accountId, float amount, OperationType operationType){
+    public Operation(long accountId, double amount, OperationType operationType){
         this.accountId = accountId;
         this.amount = amount;
         this.operationType = operationType;
@@ -23,7 +23,7 @@ public class Operation {
         return accountId;
     }
 
-    public float getAmount(){
+    public double getAmount(){
         return amount;
     }
 

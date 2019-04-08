@@ -25,7 +25,7 @@ public class AccountService {
     }
 
     @Transactional
-    public float makeDepositOnAccount(long accountId, float amount){
+    public double makeDepositOnAccount(long accountId, double amount){
         Account workingAccount = this.accountDAO.getAccountById(accountId);
         Operation operation = new Operation(accountId, amount, OperationType.DEPOSIT);
         operationDAO.persistOperation(operation);
@@ -33,7 +33,7 @@ public class AccountService {
     }
 
     @Transactional
-    public float retrieveFromAccount(long accountId, float amount){
+    public double retrieveFromAccount(long accountId, double amount){
         Account workingAccount = this.accountDAO.getAccountById(accountId);
         Operation operation = new Operation(accountId, amount, OperationType.WITHDRAWAL);
         operationDAO.persistOperation(operation);
@@ -45,7 +45,7 @@ public class AccountService {
     }
 
 
-    public float getCurrentBalance(long accountId){
+    public double getCurrentBalance(long accountId){
         Account workingAccount = this.accountDAO.getAccountById(accountId);
         return workingAccount.getBalance();
     }
