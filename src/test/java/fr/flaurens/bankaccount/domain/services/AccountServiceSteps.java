@@ -1,5 +1,6 @@
 package fr.flaurens.bankaccount.domain.services;
 
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -53,12 +54,20 @@ public class AccountServiceSteps {
 
     }
 
+    @Before(order=1)
+    public void prepareMocks(){
+        MockitoAnnotations.initMocks(this);
+    }
+
+    @Before(order=2)
+    public void initializeTimeReference(){
+        this.startingTime = Date.from(Instant.now());
+    }
+
     @Given("^I am a bank client$")
     public void i_am_a_bank_client() throws Throwable {
         this.accountId=100;
-        MockitoAnnotations.initMocks(this);
         this.expectedOperationList = new ArrayList<>();
-        this.startingTime = Date.from(Instant.now());
     }
 
     @Given("^my account balance is at €(\\d+.\\d+)$")
