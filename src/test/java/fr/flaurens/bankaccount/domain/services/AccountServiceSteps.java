@@ -86,9 +86,9 @@ public class AccountServiceSteps {
         operationList = accountService.getAccountHistory(accountId);
     }
 
-    @When("^I retrieve €(\\d+.\\d+) from my account$")
-    public void i_retrieve_€_from_my_account(double amount) throws Throwable {
-        accountService.retrieveFromAccount(accountId, amount);
+    @When("^I withdraw €(\\d+.\\d+) from my account$")
+    public void i_withdraw_€_from_my_account(double amount) throws Throwable {
+        accountService.withdrawFromAccount(accountId, amount);
         Operation expected = new Operation(accountId,amount,OperationType.WITHDRAWAL);
         this.expectedOperationList.add(expected);
         verify(operationDAOMock, times(1)).persistOperation(argThat(new OperationMatcher(expected)));

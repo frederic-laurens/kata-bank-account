@@ -33,7 +33,7 @@ public class AccountService {
     }
 
     @Transactional
-    public double retrieveFromAccount(long accountId, double amount){
+    public double withdrawFromAccount(long accountId, double amount){
         Account workingAccount = this.accountDAO.getAccountById(accountId);
         Operation operation = new Operation(accountId, amount, OperationType.WITHDRAWAL);
         operationDAO.persistOperation(operation);
