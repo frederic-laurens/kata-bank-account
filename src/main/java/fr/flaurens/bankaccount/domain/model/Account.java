@@ -8,7 +8,7 @@ public class Account {
 
     public Account(long accountId){
         this.accountId = accountId;
-        this.balance = 0f;
+        this.balance = 0d;
     }
 
     public double getBalance(){
