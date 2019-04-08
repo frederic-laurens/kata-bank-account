@@ -1,5 +1,11 @@
 Feature: Deposit
 
+US 1:
+In order to save money
+As a bank client
+I want to make a deposit in my account
+
+
 Scenario: I want to make a deposit of €100 when my balance is positive
 Given I am a bank client
 And my account balance is at €100.00

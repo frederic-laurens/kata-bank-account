@@ -1,5 +1,10 @@
 Feature: Account history
 
+US 3:
+In order to check my operations
+As a bank client
+I want to see the history (operation, date, amount, balance)  of my operations
+
 Scenario: History of 1 deposit then 1 withdrawal today
 Given I am a bank client
 And my account balance is at €200.00
