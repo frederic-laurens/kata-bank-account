@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -76,7 +78,7 @@ public class AccountServiceSteps {
 
     @Then("^the new balance of my account is €(\\d+.\\d+)$")
     public void the_new_balance_of_my_account_is_€(double amount) throws Throwable {
-        Assert.assertEquals(amount, accountService.getCurrentBalance(accountId), 0.001);
+        assertEquals(amount, accountService.getCurrentBalance(accountId), 0.001);
     }
 
     @When("^I ask to see the history \\(operation, date, amount, balance\\) of my operations$")
@@ -96,16 +98,17 @@ public class AccountServiceSteps {
     public void i_get_a_listing_of_deposit_of_€_then_withdrawal_€_of_today(int nbOfDeposits, double amountOfDeposit, int nbOfWithdrawals, double amountOfWithdrawal) throws Throwable {
         when(operationDAOMock.getOperationByAccount(accountId)).thenReturn(this.expectedOperationList);
         operationList = accountService.getAccountHistory(accountId);
-        Assert.assertEquals("Number of operations",nbOfDeposits+nbOfWithdrawals,operationList.size());
-        Assert.assertEquals("Deposit amount check",amountOfDeposit,operationList.get(0).getAmount(),0.001);
-        Assert.assertEquals("Deposit type check", OperationType.DEPOSIT,operationList.get(0).getOperationType());
-        Assert.assertTrue("Deposit date check",!operationList.get(0).getDate().after(Date.from(Instant.now()))
+
+        assertEquals("Number of operations",nbOfDeposits+nbOfWithdrawals,operationList.size());
+        assertEquals("Deposit amount check",amountOfDeposit,operationList.get(0).getAmount(),0.001);
+        assertEquals("Deposit type check", OperationType.DEPOSIT,operationList.get(0).getOperationType());
+        assertTrue("Deposit date check",!operationList.get(0).getDate().after(Date.from(Instant.now()))
                                                             && !operationList.get(0).getDate().before(startingTime));
-        Assert.assertEquals("Withdrawal amount check",amountOfWithdrawal,operationList.get(1).getAmount(),0.001);
-        Assert.assertEquals("Withdrawal type check",OperationType.WITHDRAWAL,operationList.get(1).getOperationType());
-        Assert.assertTrue("Withdrawal date check",!operationList.get(1).getDate().after(Date.from(Instant.now()))
+        assertEquals("Withdrawal amount check",amountOfWithdrawal,operationList.get(1).getAmount(),0.001);
+        assertEquals("Withdrawal type check",OperationType.WITHDRAWAL,operationList.get(1).getOperationType());
+        assertTrue("Withdrawal date check",!operationList.get(1).getDate().after(Date.from(Instant.now()))
                         && !operationList.get(1).getDate().before(startingTime));
-        Assert.assertTrue("Date order check",!operationList.get(0).getDate().after(operationList.get(1).getDate()));
+        assertTrue("Date order check",!operationList.get(0).getDate().after(operationList.get(1).getDate()));
     }
 
 }
