@@ -1,13 +1,13 @@
-package fr.flaurens.bankaccount.services;
+package fr.flaurens.bankaccount.domain.services;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import fr.flaurens.bankaccount.adapters.AccountDAO;
-import fr.flaurens.bankaccount.adapters.OperationDAO;
-import fr.flaurens.bankaccount.model.Account;
-import fr.flaurens.bankaccount.model.Operation;
-import fr.flaurens.bankaccount.model.OperationType;
+import fr.flaurens.bankaccount.domain.adapters.AccountDAO;
+import fr.flaurens.bankaccount.domain.adapters.OperationDAO;
+import fr.flaurens.bankaccount.domain.model.Account;
+import fr.flaurens.bankaccount.domain.model.Operation;
+import fr.flaurens.bankaccount.domain.model.OperationType;
 import org.junit.Assert;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

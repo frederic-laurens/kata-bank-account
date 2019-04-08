@@ -1,10 +1,10 @@
-package fr.flaurens.bankaccount.services;
+package fr.flaurens.bankaccount.domain.services;
 
-import fr.flaurens.bankaccount.adapters.AccountDAO;
-import fr.flaurens.bankaccount.adapters.OperationDAO;
-import fr.flaurens.bankaccount.model.Account;
-import fr.flaurens.bankaccount.model.Operation;
-import fr.flaurens.bankaccount.model.OperationType;
+import fr.flaurens.bankaccount.domain.adapters.AccountDAO;
+import fr.flaurens.bankaccount.domain.adapters.OperationDAO;
+import fr.flaurens.bankaccount.domain.model.Account;
+import fr.flaurens.bankaccount.domain.model.Operation;
+import fr.flaurens.bankaccount.domain.model.OperationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

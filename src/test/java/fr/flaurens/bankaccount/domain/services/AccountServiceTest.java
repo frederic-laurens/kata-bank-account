@@ -1,4 +1,4 @@
-package fr.flaurens.bankaccount.services;
+package fr.flaurens.bankaccount.domain.services;
 
 import cucumber.api.junit.Cucumber;
 import org.junit.runner.RunWith;

@@ -1,7 +1,7 @@
-package fr.flaurens.bankaccount.dao;
+package fr.flaurens.bankaccount.infrastructure;
 
-import fr.flaurens.bankaccount.adapters.OperationDAO;
-import fr.flaurens.bankaccount.model.Operation;
+import fr.flaurens.bankaccount.domain.adapters.OperationDAO;
+import fr.flaurens.bankaccount.domain.model.Operation;
 
 import java.util.List;
 

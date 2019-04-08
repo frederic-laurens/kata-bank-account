@@ -1,6 +1,6 @@
 package util;
 
-import fr.flaurens.bankaccount.model.Operation;
+import fr.flaurens.bankaccount.domain.model.Operation;
 import org.mockito.ArgumentMatcher;
 
 public class OperationMatcher implements ArgumentMatcher<Operation> {

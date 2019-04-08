@@ -1,9 +1,9 @@
 package fr.flaurens.bankaccount;
 
-import fr.flaurens.bankaccount.adapters.AccountDAO;
-import fr.flaurens.bankaccount.adapters.OperationDAO;
-import fr.flaurens.bankaccount.dao.AccountDAOImpl;
-import fr.flaurens.bankaccount.dao.OperationDAOImpl;
+import fr.flaurens.bankaccount.domain.adapters.AccountDAO;
+import fr.flaurens.bankaccount.domain.adapters.OperationDAO;
+import fr.flaurens.bankaccount.infrastructure.AccountDAOImpl;
+import fr.flaurens.bankaccount.infrastructure.OperationDAOImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

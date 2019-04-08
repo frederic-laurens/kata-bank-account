@@ -1,7 +1,7 @@
-package fr.flaurens.bankaccount.adapters;
+package fr.flaurens.bankaccount.domain.adapters;
 
 
-import fr.flaurens.bankaccount.model.Operation;
+import fr.flaurens.bankaccount.domain.model.Operation;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

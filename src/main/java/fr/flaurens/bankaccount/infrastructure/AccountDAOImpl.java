@@ -1,7 +1,7 @@
-package fr.flaurens.bankaccount.dao;
+package fr.flaurens.bankaccount.infrastructure;
 
-import fr.flaurens.bankaccount.adapters.AccountDAO;
-import fr.flaurens.bankaccount.model.Account;
+import fr.flaurens.bankaccount.domain.adapters.AccountDAO;
+import fr.flaurens.bankaccount.domain.model.Account;
 
 public class AccountDAOImpl implements AccountDAO {
 

@@ -1,4 +1,4 @@
-package fr.flaurens.bankaccount.model;
+package fr.flaurens.bankaccount.domain.model;
 
 import java.util.Date;
 
