@@ -2,9 +2,7 @@ package fr.flaurens.bankaccount.domain.services;
 
 import fr.flaurens.bankaccount.domain.adapters.AccountDAO;
 import fr.flaurens.bankaccount.domain.adapters.OperationDAO;
-import fr.flaurens.bankaccount.domain.model.Account;
-import fr.flaurens.bankaccount.domain.model.Operation;
-import fr.flaurens.bankaccount.domain.model.OperationType;
+import fr.flaurens.bankaccount.domain.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,19 +23,19 @@ public class AccountService {
     }
 
     @Transactional
-    public double makeDepositOnAccount(long accountId, double amount){
+    public double makeDepositOnAccount(long accountId, Amount amount){
         Account workingAccount = this.accountDAO.getAccountById(accountId);
-        Operation operation = new Operation(accountId, amount, OperationType.DEPOSIT);
+        Operation operation = new Deposit(accountId, amount);
         operationDAO.persistOperation(operation);
-        return workingAccount.updateBalance(amount);
+        return workingAccount.updateBalance(amount.getAmountValue());
     }
 
     @Transactional
-    public double withdrawFromAccount(long accountId, double amount){
+    public double withdrawFromAccount(long accountId, Amount amount){
         Account workingAccount = this.accountDAO.getAccountById(accountId);
-        Operation operation = new Operation(accountId, amount, OperationType.WITHDRAWAL);
+        Operation operation = new Withdrawal(accountId, amount);
         operationDAO.persistOperation(operation);
-        return workingAccount.updateBalance(-amount);
+        return workingAccount.updateBalance(-amount.getAmountValue());
     }
 
     public List<Operation> getAccountHistory(long accountId){

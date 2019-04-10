@@ -2,20 +2,17 @@ package fr.flaurens.bankaccount.domain.model;
 
 import java.util.Date;
 
-public class Operation {
+public abstract class Operation {
 
     private final long accountId;
 
-    private final double amount;
+    private final Amount amount;
 
     private final Date date;
 
-    private final OperationType operationType;
-
-    public Operation(long accountId, double amount, OperationType operationType){
+    public Operation(long accountId, Amount amount){
         this.accountId = accountId;
         this.amount = amount;
-        this.operationType = operationType;
         this.date = new Date();
     }
 
@@ -23,7 +20,7 @@ public class Operation {
         return accountId;
     }
 
-    public double getAmount(){
+    public Amount getAmount(){
         return amount;
     }
 
@@ -31,5 +28,5 @@ public class Operation {
         return date;
     }
 
-    public OperationType getOperationType (){ return operationType;}
+    public abstract  String getOperationType();
 }

@@ -16,11 +16,9 @@ public class OperationMatcher implements ArgumentMatcher<Operation> {
     }
 
     @Override
-    /**
-     * Operation dates are considered to be identical if there is less the 1 second difference between them
-     */
+    //Operation dates are considered to be identical if there is less the 1 second difference between them
     public boolean matches(Operation actual) {
-        return expected.getAmount() == actual.getAmount() &&
+        return expected.getAmount().equals(actual.getAmount()) &&
                 expected.getAccountId() == actual.getAccountId() &&
                 sameDate(actual.getDate(), expected.getDate(), 1000) &&
                 expected.getOperationType().equals(actual.getOperationType());
