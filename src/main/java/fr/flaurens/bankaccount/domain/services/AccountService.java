@@ -10,19 +10,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
 public class AccountService {
 
     private final AccountDAO accountDAO;
 
     private final OperationDAO operationDAO;
 
-    public AccountService(@Autowired AccountDAO accountDAO, @Autowired OperationDAO operationDAO){
+    public AccountService(AccountDAO accountDAO, OperationDAO operationDAO){
         this.accountDAO = accountDAO;
         this.operationDAO = operationDAO;
     }
 
-    @Transactional
     public double makeDepositOnAccount(long accountId, Amount amount){
         Account workingAccount = this.accountDAO.getAccountById(accountId);
         Operation operation = new Deposit(accountId, amount);
@@ -30,7 +28,7 @@ public class AccountService {
         return workingAccount.updateBalance(amount.getAmountValue());
     }
 
-    @Transactional
+
     public double withdrawFromAccount(long accountId, Amount amount){
         Account workingAccount = this.accountDAO.getAccountById(accountId);
         Operation operation = new Withdrawal(accountId, amount);
