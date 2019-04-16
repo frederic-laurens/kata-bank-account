@@ -6,8 +6,17 @@ public class Deposit extends Operation {
         super(accountId, amount);
     }
 
+    public Deposit(Deposit other){
+        super(other);
+    }
+
+    @Override
+    public double calculateIncrement() {
+        return getAmount().getAmountValue();
+    }
+
     @Override
     public String getOperationType() {
-        return "deposit";
+        return Operation.DEPOSIT;
     }
 }

@@ -5,6 +5,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import fr.flaurens.bankaccount.domain.adapters.AccountDAO;
+import fr.flaurens.bankaccount.domain.adapters.AccountHistoryLineDAO;
 import fr.flaurens.bankaccount.domain.adapters.OperationDAO;
 import fr.flaurens.bankaccount.domain.model.*;
 import org.junit.Assert;
@@ -15,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import util.OperationMatcher;
 
+import javax.swing.plaf.basic.BasicTreeUI;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,6 +38,9 @@ public class AccountServiceSteps {
 
     @Mock
     private OperationDAO operationDAOMock;
+
+    @Mock
+    private AccountHistoryLineDAO accountHistoryLineDAOMock;
 
     @InjectMocks
     private AccountService accountService;
@@ -69,7 +74,7 @@ public class AccountServiceSteps {
     }
 
     @Given("^my account balance is at €(\\d+.\\d+)$")
-    public void my_account_balance_is_at_€(double amount) {
+    public void my_account_balance_is_at_€(double amount) throws Throwable{
         Account account = new Account(accountId);
         account.updateBalance(amount);
         when(accountDAOMock.getAccountById(accountId)).thenReturn(account);
@@ -84,12 +89,12 @@ public class AccountServiceSteps {
     }
 
     @Then("^the new balance of my account is €(\\d+.\\d+)$")
-    public void the_new_balance_of_my_account_is_€(double amount) {
+    public void the_new_balance_of_my_account_is_€(double amount) throws Throwable {
         assertEquals(amount, accountService.getCurrentBalance(accountId), 0.001);
     }
 
     @When("^I ask to see the history \\(operation, date, amount, balance\\) of my operations$")
-    public void i_ask_to_see_the_history_operation_date_amount_balance_of_my_operations()  {
+    public void i_ask_to_see_the_history_operation_date_amount_balance_of_my_operations() throws Throwable {
         operationList = accountService.getAccountHistory(accountId);
     }
 
@@ -102,7 +107,7 @@ public class AccountServiceSteps {
     }
 
     @Then("^I get a listing of (\\d+) deposit of €(\\d+.\\d+) then (\\d+) withdrawal €(\\d+.\\d+) of today$")
-    public void i_get_a_listing_of_deposit_of_€_then_withdrawal_€_of_today(int nbOfDeposits, double amountOfDeposit, int nbOfWithdrawals, double amountOfWithdrawal) {
+    public void i_get_a_listing_of_deposit_of_€_then_withdrawal_€_of_today(int nbOfDeposits, double amountOfDeposit, int nbOfWithdrawals, double amountOfWithdrawal) throws Throwable {
         when(operationDAOMock.getOperationByAccount(accountId)).thenReturn(this.expectedOperationList);
         operationList = accountService.getAccountHistory(accountId);
 
@@ -117,5 +122,4 @@ public class AccountServiceSteps {
                         && !operationList.get(1).getDate().before(startingTime));
         assertTrue("Date order check",!operationList.get(0).getDate().after(operationList.get(1).getDate()));
     }
-
 }

@@ -19,4 +19,8 @@ public class Account {
         this.balance += amount;
         return this.balance;
     }
+
+    public boolean overdraft(){
+        return balance < 0d;
+    }
 }

@@ -6,7 +6,16 @@ public class Withdrawal extends Operation {
         super(accountId, amount);
     }
 
+    public Withdrawal(Withdrawal other){
+        super(other);
+    }
+
+    @Override
+    public double calculateIncrement() {
+        return -getAmount().getAmountValue();
+    }
+
     public String getOperationType(){
-        return "withdrawal";
+        return Operation.WITHDRAWAL;
     }
 }
